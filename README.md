@@ -20,7 +20,7 @@ and add **ShotlistKit** to your app target. In XcodeGen:
 packages:
   ShotlistKit:
     url: https://github.com/richiehopedbt/ShotlistKit
-    from: 0.1.0
+    from: 0.1.1
 targets:
   MyApp:
     dependencies:
@@ -33,12 +33,32 @@ targets:
 | `ShotlistKit` | Every app: scenes for SwiftUI, UIKit and deep links, readiness, holds and fixtures. |
 | `ShotlistDependencies` | Apps using [swift-dependencies](https://github.com/pointfreeco/swift-dependencies): pins the date, UUIDs, clock and locale in each scene. |
 | `ShotlistTCA` | Apps built with the [Composable Architecture](https://github.com/pointfreeco/swift-composable-architecture): `TCAScene`. |
+| `ShotlistMacros` | `@Shot`, which writes your app's `body` so it hosts the scenes with no `#if DEBUG` in your `App`. |
 
-Xcode resolves swift-dependencies and the Composable Architecture when you add the package, but links only the products you choose. ShotlistKit needs iOS 17 or later.
+Xcode resolves swift-dependencies, the Composable Architecture and swift-syntax when you add the package, but links only the products you choose. ShotlistKit needs iOS 17 or later.
+
+## Host the scenes in one line
+
+With `ShotlistMacros` linked too, `@Shot` writes your app's `body`. You write `root`, your app's normal root view:
+
+```swift
+import ShotlistMacros
+import SwiftUI
+
+@main
+@Shot
+struct LarderApp: App {
+    var root: some View {
+        RootView()
+    }
+}
+```
+
+When Shotlist launches the app, the body shows the Shotlist host with your `Screenshots.scenes`. Otherwise, and in every Release build, it's just `WindowGroup { root }`. Import ShotlistMacros outside `#if DEBUG`, so `@Shot` exists in Release too; it declares nothing but the macro. The [user guide](https://digitalhopeltd.com/shotlist/guide/setup) covers link scenes that need their own root, and hosting the scenes yourself.
 
 ## Versions
 
-Use the ShotlistKit version that matches your Shotlist app and command-line tool. The engine checks ShotlistKit's protocol version when your app connects, and says which to update if they don't match.
+Use a ShotlistKit release from the same minor version as your Shotlist app and command-line tool: 0.1.x with Shotlist 0.1. The engine checks ShotlistKit's protocol version when your app connects, and says which to update if they don't match.
 
 ## Licence
 
