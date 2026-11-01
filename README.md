@@ -38,7 +38,7 @@ Xcode resolves swift-dependencies and the Composable Architecture when you add t
 
 ## Versions
 
-Use the ShotlistKit version that matches your Shotlist app and command-line tool. The app and the engine check each other's protocol version when they connect, and say so if they don't match.
+Use the ShotlistKit version that matches your Shotlist app and command-line tool. The engine checks ShotlistKit's protocol version when your app connects, and says which to update if they don't match.
 
 ## Licence
 
