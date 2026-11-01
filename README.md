@@ -1,3 +1,5 @@
+![ShotlistKit: App Store screenshots from code, for every device, locale and appearance](.github/hero.jpg)
+
 # ShotlistKit
 
 The library your app links so [Shotlist](https://digitalhopeltd.com/shotlist) can capture its App Store screenshots from code, across every device, locale and appearance.
